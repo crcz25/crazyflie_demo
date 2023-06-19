@@ -69,8 +69,59 @@ make unit
 export PYTHONPATH=~/crazyflie-firmware/build:$PYTHONPATH
 
 7. Run example
-source ~/crazyflies_ws/install/setup.bash
-ros2 launch crazyflie_examples keyboard_velmux_launch.py
+source ~/crazyflie-ws/install/setup.bash
+ros2 launch crazyflie_examples keyboard_velmux_launch.py -> dron real
+
 ros2 launch crazyflie launch.py backend:=sim
+ros2 run crazyflie_examples hello_world --ros-args -p use_sim_time:=True
 
 
+
+# Install client
+sudo apt install git python3-pip libxcb-xinerama0
+pip3 install --upgrade pip
+
+# Set instructions
+sudo groupadd plugdev
+sudo usermod -a -G plugdev $USER
+
+cat <<EOF | sudo tee /etc/udev/rules.d/99-bitcraze.rules > /dev/null
+# Crazyradio (normal operation)
+SUBSYSTEM=="usb", ATTRS{idVendor}=="1915", ATTRS{idProduct}=="7777", MODE="0664", GROUP="plugdev"
+# Bootloader
+SUBSYSTEM=="usb", ATTRS{idVendor}=="1915", ATTRS{idProduct}=="0101", MODE="0664", GROUP="plugdev"
+# Crazyflie (over USB)
+SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", MODE="0664", GROUP="plugdev"
+EOF
+
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+
+pip3 install cfclient
+
+# Test
+cfclient
+
+
+# Get the address to connect via radio
+1. first connect the drone via usb
+2. launch the client
+3. go to connect-> connect to crazyflie->
+4. Get the address: connect->configure 2.x->Radio Address
+5. click disconnect
+6. Unplug the drone
+
+#Connect via radio
+5. plug the radio
+6. insert the address from the previous step in the field "Address"
+7. click scan
+8. click connect 
+
+
+# Install vrpn
+# mkdir -p ~/crazyflie-ws/src
+# cd ~/crazyflie-ws/src
+# clone repo in home directory
+git clone --single-branch --branch debian/noetic/vrpn https://github.com/ajordan5/vrpn_client_ros2.git
+
+git clone --single-branch https://github.com/ajordan5/vrpn_client_ros2.git
