@@ -49,9 +49,11 @@ Follow the instructions in the [ROS 2 Galactic installation guide](https://docs.
 
 ```cd ~/crazyflie-ws/src```
 
-```git clone https://github.com/IMRCLab/crazyswarm2 --recursive```
+```git clone https://github.com/crcz25/crazyflie_demo.git```
 
-```git clone --branch ros2 --recursive https://github.com/IMRCLab/motion_capture_tracking.git```
+```git clone --branch crazyflie_demo --recursive https://github.com/crcz25/crazyswarm2.git```
+
+```git clone --branch crazyflie_demo --recursive https://github.com/crcz25/motion_capture_tracking.git```
 
 ```cd ../```
 
