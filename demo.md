@@ -28,9 +28,10 @@ source ~/crazyflie-ws/install/setup.bash
 Modify the file crazyflies.yaml located in ~/crazyflie-ws/src/crazyswarm2/crazyflies.yaml and configure the following variables accordingly:
 - uri
 - type
-- motion_capature->enabled (true or false)
-- firmware_logging->enabled (true or false)
-
+- motion_capture->enabled (set true or false if you are using motion capture or not)
+- firmware_logging->enabled (set true or false if you are logging the data)
+- firmware_params->stabilizer->estimator (set to 2)
+- firmware_params->stabilizer->controller (set to 1)
 ## 4. Launch the package with the desired backend.
 Once the setup is complete, you can launch the package with the desired backend. For example, to launch the package with the cflib backend, execute the following command in a terminal:
 
@@ -47,10 +48,6 @@ The drone should take off and then land after 5 seconds.
 ![Alt text](./img/demo/terminal.gif)
 
 ![Alt text](./img/demo/real_drone.gif)
-
-
-
-
 
 ## Reference
 https://imrclab.github.io/crazyswarm2/usage.html#physical-experiments
