@@ -7,9 +7,9 @@ export PYTHONPATH=~/crazyflie-firmware/build:$PYTHONPATH
 ## 2. Source the crazyswarm2 ROS workspace
 source ~/crazyflie-ws/install/setup.bash
 ## 3. Run the simulator.
-### 1. Open a terminal window and issue the following command:
+### 1. Open a terminal window and issue the following command to launch the simulator:
 ros2 launch crazyflie launch.py backend:=sim
-### 2. Open a terminal window and issue the following command:
+### 2. Open a terminal window and issue the following command to execute an example of takeoff and landing:
 ros2 run crazyflie_examples hello_world --ros-args -p use_sim_time:=True
 ### 3. The drone should take off and then land after 5 seconds.
 ![Alt text](./img/demo/1.png?raw=true)
@@ -51,3 +51,11 @@ The drone should take off and then land after 5 seconds.
 
 ## Reference
 https://imrclab.github.io/crazyswarm2/usage.html#physical-experiments
+
+# Control the drone
+
+## Manual takeoff
+ros2 service call cf1/takeoff crazyflie_interfaces/srv/Takeoff "{height: 0.5, duration: {sec: 2}}"
+
+## Manual landing
+ros2 service call cf1/land crazyflie_interfaces/srv/Land "{height: 0.0, duration: {sec: 2}}"
